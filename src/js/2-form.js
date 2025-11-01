@@ -1,45 +1,56 @@
-const STORAGE_KEY = "feedback-form-state";
-let formData = { email: "", message: "" };
+const STORAGE_KEY = 'feedback-form-state';
 
-const form = document.querySelector(".feedback-form");
-const emailField = form.elements.email;
-const messageField = form.elements.message;
+// Об'єкт formData ПОЗА будь-якими функціями
+let formData = { email: '', message: '' };
 
-restoreForm();
+const form = document.querySelector('.feedback-form');
+const emailEl = form.elements.email;
+const messageEl = form.elements.message;
 
-form.addEventListener("input", onInput);
-form.addEventListener("submit", onSubmit);
+// Відновлення стану при завантаженні сторінки
+restoreFromStorage();
+
+// Делегування: слухаємо input на формі
+form.addEventListener('input', onInput);
+form.addEventListener('submit', onSubmit);
 
 function onInput(evt) {
   const { name, value } = evt.target;
-  formData[name] = value.trim();
+  if (!(name in formData)) return;
+
+  // Записуємо у сховище обрізані значення
+  formData = { ...formData, [name]: value.trim() };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
 function onSubmit(evt) {
   evt.preventDefault();
 
+  // Перевірка саме по formData (обидва поля мають бути заповнені)
   if (!formData.email || !formData.message) {
-    alert("Fill please all fields");
+    alert('Fill please all fields');
     return;
   }
 
+  // Вивід у консоль актуального об'єкта
   console.log(formData);
+
+  // Очищення сховища, об'єкта і форми
   localStorage.removeItem(STORAGE_KEY);
+  formData = { email: '', message: '' };
   form.reset();
-  formData = { email: "", message: "" };
 }
 
-function restoreForm() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (!saved) return;
+function restoreFromStorage() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
 
   try {
-    const parsed = JSON.parse(saved);
-    emailField.value = parsed.email || "";
-    messageField.value = parsed.message || "";
-    formData = parsed;
+    const saved = JSON.parse(raw);
+    emailEl.value = typeof saved.email === 'string' ? saved.email : '';
+    messageEl.value = typeof saved.message === 'string' ? saved.message : '';
+    formData = { email: emailEl.value, message: messageEl.value };
   } catch {
-    console.error("Помилка зчитування з localStorage");
+    // Некоректний JSON — ігноруємо
   }
 }

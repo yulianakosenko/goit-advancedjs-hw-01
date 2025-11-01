@@ -1,219 +1,233 @@
-/* General styles */
+/* ========= Design tokens (як у Figma) ========= */
+:root {
+  --bg: #f6f6fe;
+  --text: #2e2f42;
+  --muted: #8e8f99;
+  --primary: #4e75ff;
+  --primary-hover: #6c8cff;
+  --white: #ffffff;
+
+  --radius: 8px;
+  --gap: 24px;
+  --shadow-sm: 0 2px 8px rgba(46, 47, 66, 0.08);
+  --shadow-md: 0 6px 18px rgba(46, 47, 66, 0.1);
+}
+
+/* ========= Base / reset ========= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Arial,
+    sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-
-
-/* Gallery */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 1440px;
-  margin: 24px auto;
-  padding: 24 0px;
-}
-
-.gallery-item {
-  width: 100%;
-  height: 200px;
-  /* можна міняти на auto для повної адаптивності */
-  overflow: hidden;
-  border-radius: 4px;
-}
-
-.gallery-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.gallery-image:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
-}
-
-/* Modal window */
-.modal {
-  display: none;
-  /* hidden by default */
-  position: fixed;
-  /* covers entire screen */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  /* dark semi-transparent background */
-  justify-content: center;
-  /* horizontal centering */
-  align-items: center;
-  /* vertical centering */
-  z-index: 1000;
-}
-
-.modal-img {
-  max-width: 90%;
-  max-height: 80%;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
-  user-select: none;
-}
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #fff;
-  cursor: pointer;
-  user-select: none;
-  padding: 10px 15px;
-  background: rgba(0, 0, 0, 0.5);
-  /* semi-transparent background */
-  border-radius: 50%;
-}
-
-.arrow.left {
-  left: 20px;
-  /* closer to screen edge */
-}
-
-.arrow.right {
-  right: 20px;
-}
-
-/* Counter for modal */
-.counter {
-  display: none;
-  /* hidden by default */
-  position: fixed;
-  /* fixed, щоб завжди був у вікні */
-  top: 20px;
-  left: 20px;
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: bold;
-  user-select: none;
-  background: rgba(0, 0, 0, 0.5);
-  /* semi-transparent background */
-  padding: 5px 10px;
-  border-radius: 5px;
-  z-index: 1001;
-  /* щоб був над модалкою */
-}
-
-/* Show counter only when modal is open */
-.modal.show .counter {
+img {
   display: block;
+  max-width: 100%;
+  height: auto;
 }
-
-/* Responsiveness */
-@media (max-width: 1200px) {
-  .modal {
-    width: 90%;
-    height: 60%;
-  }
-
-  .arrow.left {
-    left: -60px;
-  }
-
-  .arrow.right {
-    right: -60px;
-  }
-}
-
-@media (max-width: 768px) {
-  .gallery-item {
-    width: 45%;
-    height: 180px;
-  }
-
-  .arrow.left,
-  .arrow.right {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .gallery-item {
-    width: 90%;
-    height: 150px;
-  }
-}
-
-
-
-
-body {
-  font-family: system-ui, sans-serif;
-  background-color: #fafafa;
-  color: #111;
-  margin: 0;
-  padding: 20px;
-}
-
-ul.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
+ul {
   list-style: none;
+  margin: 0;
   padding: 0;
 }
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+}
+
+/* ========= Layout ========= */
+.container {
+  max-width: 1160px; /* макетна ширина */
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin: 32px 0 12px;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--white);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: var(--shadow-sm);
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+.btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.btn:active {
+  transform: translateY(0);
+}
+
+/* ========= Gallery ========= */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* десктоп: 3 в ряд */
+  gap: var(--gap);
+  margin: 24px 0 40px;
+}
+@media (max-width: 960px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
 
 .gallery-item {
+  background: var(--white);
+  border-radius: var(--radius);
   overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.gallery-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-.gallery-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+.gallery-link {
   display: block;
 }
+.gallery-image {
+  width: 100%;
+  height: 220px; /* фіксована висота як у макеті */
+  object-fit: cover;
+}
 
+/* ========= SimpleLightbox (підпис знизу, читабельний) ========= */
+.sl-wrapper .sl-counter {
+  font-size: 13px;
+  color: var(--muted);
+}
+.sl-caption {
+  font-size: 14px;
+  padding: 10px 14px;
+  color: var(--white);
+  background: rgba(0, 0, 0, 0.45);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+/* ========= Feedback Form ========= */
 .feedback-form {
-  display: grid;
-  gap: 12px;
-  max-width: 420px;
+  max-width: 480px;
   margin: 40px auto;
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: 16px;
 }
 
 .feedback-form label {
   display: grid;
-  gap: 4px;
+  gap: 8px;
   font-weight: 600;
 }
 
 .feedback-form input,
 .feedback-form textarea {
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font: inherit;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d0d5dd;
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--text);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-.feedback-form button {
-  background-color: #111;
-  color: #fff;
+.feedback-form input::placeholder,
+.feedback-form textarea::placeholder {
+  color: #b7b9c0;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(78, 117, 255, 0.18);
+}
+
+.feedback-form button[type='submit'] {
+  justify-self: start;
+  padding: 10px 16px;
   border: none;
-  padding: 10px;
-  border-radius: 6px;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: 0.02em;
   cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+.feedback-form button[type='submit']:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ========= Helpers ========= */
+.mt-24 {
+  margin-top: 24px;
+}
+.mb-24 {
+  margin-bottom: 24px;
 }
