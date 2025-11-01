@@ -1,33 +1,32 @@
-// 1) Імпортуємо дані та бібліотеку (npm)
-import { images } from './images.js';
-// Описаний в документації
+// Імпорт бібліотеки SimpleLightbox
 import SimpleLightbox from 'simplelightbox';
-// Додатковий імпорт стилів
+// Імпорт стилів бібліотеки
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-// 2) Рендеримо картки за шаблоном із ТЗ
+// Імпорт масиву зображень
+import { images } from './images.js';
+
+// Знаходимо контейнер галереї
 const gallery = document.querySelector('.gallery');
 
-const markup = images
+// Створюємо розмітку карток галереї
+const galleryMarkup = images
   .map(
     ({ preview, original, description }) => `
 <li class="gallery-item">
   <a class="gallery-link" href="${original}">
-    <img
-      class="gallery-image"
-      src="${preview}"
-      alt="${description}"
-    />
+    <img class="gallery-image" src="${preview}" alt="${description}" />
   </a>
 </li>`
   )
   .join('');
 
-gallery.insertAdjacentHTML('beforeend', markup);
+// Додаємо розмітку у DOM
+gallery.insertAdjacentHTML('beforeend', galleryMarkup);
 
-// 3) Ініціалізуємо SimpleLightbox ПІСЛЯ додавання елементів і ПОЗА будь-якими функціями
+// Ініціалізуємо SimpleLightbox поза функціями
 new SimpleLightbox('.gallery a', {
-  captionsData: 'alt', // підпис беремо з alt
-  captionPosition: 'bottom', // знизу
-  captionDelay: 250, // через 250 мс
+  captionsData: 'alt',
+  captionDelay: 250,
+  captionPosition: 'bottom',
 });

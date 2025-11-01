@@ -1,25 +1,26 @@
-/* ========= Design tokens (як у Figma) ========= */
+/* ===================== Design tokens ===================== */
 :root {
   --bg: #f6f6fe;
+  --surface: #ffffff;
   --text: #2e2f42;
   --muted: #8e8f99;
+
   --primary: #4e75ff;
   --primary-hover: #6c8cff;
-  --white: #ffffff;
 
   --radius: 8px;
   --gap: 24px;
+
   --shadow-sm: 0 2px 8px rgba(46, 47, 66, 0.08);
   --shadow-md: 0 6px 18px rgba(46, 47, 66, 0.1);
 }
 
-/* ========= Base / reset ========= */
+/* ===================== Base / reset ===================== */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-
 html,
 body {
   height: 100%;
@@ -28,7 +29,7 @@ body {
 body {
   margin: 0;
   font-family:
-    'Inter',
+    Inter,
     system-ui,
     -apple-system,
     'Segoe UI',
@@ -42,15 +43,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-img {
+img,
+svg,
+video {
   display: block;
   max-width: 100%;
   height: auto;
 }
 ul {
-  list-style: none;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 a {
   color: inherit;
@@ -60,33 +63,37 @@ button {
   font: inherit;
 }
 
-/* ========= Layout ========= */
+/* ===================== Layout / helpers ===================== */
 .container {
-  max-width: 1160px; /* макетна ширина */
-  padding: 0 20px;
+  max-width: 1160px;
   margin: 0 auto;
+  padding: 24px 20px;
 }
-
 h1 {
-  margin: 32px 0 12px;
+  margin: 16px 0 12px;
   font-size: 32px;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
+.mt-24 {
+  margin-top: 24px;
+}
+.mb-24 {
+  margin-bottom: 24px;
+}
 
+/* ===================== Nav (індексна сторінка) ===================== */
 .nav {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 24px;
 }
-
 .btn {
   display: inline-block;
   padding: 10px 16px;
   border-radius: var(--radius);
   background: var(--primary);
-  color: var(--white);
+  color: #fff;
   font-weight: 600;
   letter-spacing: 0.02em;
   box-shadow: var(--shadow-sm);
@@ -104,12 +111,14 @@ h1 {
   transform: translateY(0);
 }
 
-/* ========= Gallery ========= */
+/* ===================== Gallery (Завдання 1) ===================== */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* десктоп: 3 в ряд */
+  grid-template-columns: repeat(3, 1fr); /* як у макеті: 3 в ряд на десктопі */
   gap: var(--gap);
-  margin: 24px 0 40px;
+  margin: 24px auto 40px;
+  padding: 0;
+  max-width: 1160px;
 }
 @media (max-width: 960px) {
   .gallery {
@@ -123,7 +132,7 @@ h1 {
 }
 
 .gallery-item {
-  background: var(--white);
+  background: var(--surface);
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -139,31 +148,34 @@ h1 {
 .gallery-link {
   display: block;
 }
+
 .gallery-image {
   width: 100%;
-  height: 220px; /* фіксована висота як у макеті */
+  height: 240px; /* фіксована висота під грід */
   object-fit: cover;
+  display: block;
 }
 
-/* ========= SimpleLightbox (підпис знизу, читабельний) ========= */
+/* SimpleLightbox captions — знизу, читабельно */
 .sl-wrapper .sl-counter {
   font-size: 13px;
   color: var(--muted);
 }
 .sl-caption {
   font-size: 14px;
+  line-height: 1.4;
   padding: 10px 14px;
-  color: var(--white);
+  color: #fff;
   background: rgba(0, 0, 0, 0.45);
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 }
 
-/* ========= Feedback Form ========= */
+/* ===================== Feedback Form (Завдання 2) ===================== */
 .feedback-form {
   max-width: 480px;
   margin: 40px auto;
-  background: var(--white);
+  background: var(--surface);
   padding: 20px;
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
@@ -183,11 +195,16 @@ h1 {
   padding: 10px 12px;
   border: 1px solid #d0d5dd;
   border-radius: var(--radius);
-  background: var(--white);
+  background: #fff;
   color: var(--text);
   transition:
     border-color 0.15s ease,
     box-shadow 0.15s ease;
+}
+
+.feedback-form textarea {
+  resize: vertical;
+  min-height: 140px;
 }
 
 .feedback-form input::placeholder,
@@ -208,7 +225,7 @@ h1 {
   border: none;
   border-radius: var(--radius);
   background: var(--primary);
-  color: var(--white);
+  color: #fff;
   font-weight: 700;
   letter-spacing: 0.02em;
   cursor: pointer;
@@ -224,10 +241,8 @@ h1 {
   box-shadow: var(--shadow-md);
 }
 
-/* ========= Helpers ========= */
-.mt-24 {
-  margin-top: 24px;
-}
-.mb-24 {
-  margin-bottom: 24px;
+/* ===================== Accessibility ===================== */
+:focus-visible {
+  outline: 3px solid rgba(78, 117, 255, 0.35);
+  outline-offset: 2px;
 }
