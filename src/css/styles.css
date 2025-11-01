@@ -1,18 +1,219 @@
-/**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
-/* Common styles */
-@import url('./reset.css');
-@import url('./base.css');
-@import url('./container.css');
-@import url('./animations.css');
+/* General styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
 
-/* Sections style */
-@import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
-@import url('./back-link.css');
-@import url('./footer.css');
+
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1440px;
+  margin: 24px auto;
+  padding: 24 0px;
+}
+
+.gallery-item {
+  width: 100%;
+  height: 200px;
+  /* можна міняти на auto для повної адаптивності */
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-image:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Modal window */
+.modal {
+  display: none;
+  /* hidden by default */
+  position: fixed;
+  /* covers entire screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  /* dark semi-transparent background */
+  justify-content: center;
+  /* horizontal centering */
+  align-items: center;
+  /* vertical centering */
+  z-index: 1000;
+}
+
+.modal-img {
+  max-width: 90%;
+  max-height: 80%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.5);
+  /* semi-transparent background */
+  border-radius: 50%;
+}
+
+.arrow.left {
+  left: 20px;
+  /* closer to screen edge */
+}
+
+.arrow.right {
+  right: 20px;
+}
+
+/* Counter for modal */
+.counter {
+  display: none;
+  /* hidden by default */
+  position: fixed;
+  /* fixed, щоб завжди був у вікні */
+  top: 20px;
+  left: 20px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  user-select: none;
+  background: rgba(0, 0, 0, 0.5);
+  /* semi-transparent background */
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 1001;
+  /* щоб був над модалкою */
+}
+
+/* Show counter only when modal is open */
+.modal.show .counter {
+  display: block;
+}
+
+/* Responsiveness */
+@media (max-width: 1200px) {
+  .modal {
+    width: 90%;
+    height: 60%;
+  }
+
+  .arrow.left {
+    left: -60px;
+  }
+
+  .arrow.right {
+    right: -60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-item {
+    width: 45%;
+    height: 180px;
+  }
+
+  .arrow.left,
+  .arrow.right {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-item {
+    width: 90%;
+    height: 150px;
+  }
+}
+
+
+
+
+body {
+  font-family: system-ui, sans-serif;
+  background-color: #fafafa;
+  color: #111;
+  margin: 0;
+  padding: 20px;
+}
+
+ul.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.feedback-form {
+  display: grid;
+  gap: 12px;
+  max-width: 420px;
+  margin: 40px auto;
+}
+
+.feedback-form label {
+  display: grid;
+  gap: 4px;
+  font-weight: 600;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.feedback-form button {
+  background-color: #111;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
