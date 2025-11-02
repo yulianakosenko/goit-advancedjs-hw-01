@@ -4,7 +4,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const gallery = document.querySelector('.gallery');
 
-// Генеруємо ВСІ елементи одразу
 const markup = images
   .map(
     ({ preview, original, description }) => `
@@ -16,14 +15,19 @@ const markup = images
   )
   .join('');
 
+// 1) Спочатку вставляємо ВСІ елементи
 gallery.insertAdjacentHTML('beforeend', markup);
 
-// Ініціалізуємо ПІСЛЯ вставки та ПОЗА функціями
+// 2) Потім ініціалізуємо SL
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionPosition: 'bottom',
   captionDelay: 250,
 });
 
-// Якщо колись будеш ДОКИДАТИ нові елементи у .gallery — викличеш:
-// lightbox.refresh();
+// 3) На всяк випадок — оновимо список (якщо щось додасться пізніше)
+lightbox.refresh();
+
+// ДІАГНОСТИКА:
+console.log('anchors found:', document.querySelectorAll('.gallery a').length);
+console.log('images array length:', images.length);
