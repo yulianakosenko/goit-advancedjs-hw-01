@@ -25,7 +25,6 @@ html,
 body {
   height: 100%;
 }
-
 body {
   margin: 0;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial,
@@ -36,7 +35,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 img,
 svg,
 video {
@@ -57,7 +55,7 @@ button {
   font: inherit;
 }
 
-/* ===================== Layout / helpers ===================== */
+/* ===================== Layout ===================== */
 .container {
   max-width: 1160px;
   margin: 0 auto;
@@ -69,22 +67,38 @@ h1 {
   font-weight: 700;
   letter-spacing: 0.01em;
 }
-.mt-24 {
-  margin-top: 24px;
-}
-.mb-24 {
-  margin-bottom: 24px;
+
+/* ===================== Головна сторінка ===================== */
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  text-align: center;
+  gap: 32px;
 }
 
-/* ===================== Nav (індексна сторінка) ===================== */
+.home__title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Контейнер кнопок */
 .nav {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px; /* відстань між кнопками */
 }
+
+/* Кнопки */
 .btn {
   display: inline-block;
-  padding: 10px 16px;
+  width: 260px;
+  text-align: center;
+  padding: 14px 24px;
   border-radius: var(--radius);
   background: var(--primary);
   color: #fff;
@@ -95,20 +109,19 @@ h1 {
 }
 .btn:hover {
   background: var(--primary-hover);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 .btn:active {
   transform: translateY(0);
 }
 
-/* ===================== Gallery (Завдання 1) ===================== */
+/* ===================== Галерея (Завдання 1) ===================== */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* як у макеті: 3 в ряд на десктопі */
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--gap);
   margin: 24px auto 40px;
-  padding: 0;
   max-width: 1160px;
 }
 @media (max-width: 960px) {
@@ -121,7 +134,6 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
-
 .gallery-item {
   background: var(--surface);
   border-radius: var(--radius);
@@ -133,31 +145,13 @@ h1 {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
-
 .gallery-link {
   display: block;
 }
-
 .gallery-image {
   width: 100%;
-  height: 240px; /* фіксована висота під грід */
+  height: 240px;
   object-fit: cover;
-  display: block;
-}
-
-/* SimpleLightbox captions — знизу, читабельно */
-.sl-wrapper .sl-counter {
-  font-size: 13px;
-  color: var(--muted);
-}
-.sl-caption {
-  font-size: 14px;
-  line-height: 1.4;
-  padding: 10px 14px;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.45);
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
 }
 
 /* ===================== Feedback Form (Завдання 2) ===================== */
@@ -171,13 +165,11 @@ h1 {
   display: grid;
   gap: 16px;
 }
-
 .feedback-form label {
   display: grid;
   gap: 8px;
   font-weight: 600;
 }
-
 .feedback-form input,
 .feedback-form textarea {
   width: 100%;
@@ -188,24 +180,20 @@ h1 {
   color: var(--text);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-
 .feedback-form textarea {
   resize: vertical;
   min-height: 140px;
 }
-
 .feedback-form input::placeholder,
 .feedback-form textarea::placeholder {
   color: #b7b9c0;
 }
-
 .feedback-form input:focus,
 .feedback-form textarea:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(78, 117, 255, 0.18);
 }
-
 .feedback-form button[type='submit'] {
   justify-self: start;
   padding: 10px 16px;
@@ -229,53 +217,4 @@ h1 {
 :focus-visible {
   outline: 3px solid rgba(78, 117, 255, 0.35);
   outline-offset: 2px;
-}
-/* === ГОЛОВНА СТОРІНКА === */
-.home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100dvh;
-  text-align: center;
-  gap: 24px;
-}
-
-.home__title {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 8px;
-}
-
-.home__subtitle {
-  font-size: 16px;
-  color: var(--muted);
-  margin-bottom: 32px;
-}
-
-.home__nav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.home__btn {
-  display: inline-block;
-  background: #11163a;
-  color: var(--text);
-  font-weight: 600;
-  text-decoration: none;
-  padding: 12px 32px;
-  border-radius: 12px;
-  border: 1px solid #2a2f55;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-}
-
-.home__btn:hover {
-  background: #1e2558;
-  color: #9bc2ff;
-  transform: translateY(-2px);
 }

@@ -6,11 +6,11 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  root: 'src',
+  root: 'src/public',
   base: '/goit-advancedjs-hw-01/',
 
   build: {
-    outDir: '../dist',
+    outDir: '../../dist',
     emptyOutDir: true,
     rollupOptions: {
       input: {
