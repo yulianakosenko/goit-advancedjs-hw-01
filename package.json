@@ -1,24 +1,21 @@
 {
-  "name": "goit-advancedjs-hw-01",
+  "name": "vanilla-app-template",
+  "private": true,
   "version": "1.0.0",
-  "description": "GOIT Advanced JS Homework 1 - Module 2 (Gallery + Feedback Form)",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build --base=/goit-advancedjs-hw-01/",
     "preview": "vite preview",
-    "clean": "rimraf dist",
-    "format": "prettier --write ."
-  },
-  "keywords": [],
-  "author": "Yuliya",
-  "license": "ISC",
-  "dependencies": {
-    "simplelightbox": "^2.14.3"
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
-    "prettier": "^3.3.3",
-    "rimraf": "^6.1.0",
-    "vite": "^6.4.1"
+    "gh-pages": "^6.1.1",
+    "glob": "^11.0.0",
+    "vite": "^7.1.12"
+  },
+  "dependencies": {
+    "izitoast": "^1.4.0",
+    "simplelightbox": "^2.14.1"
   }
 }

@@ -8,6 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   root: 'src',
   base: '/goit-advancedjs-hw-01/',
+
   build: {
     outDir: '../dist',
     emptyOutDir: true,

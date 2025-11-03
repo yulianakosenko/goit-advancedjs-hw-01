@@ -1,17 +1,14 @@
 import '../css/styles.css';
-const STORAGE_KEY = 'feedback-form-state';
 
-// Об'єкт formData ПОЗА будь-якими функціями
+const STORAGE_KEY = 'feedback-form-state';
 let formData = { email: '', message: '' };
 
 const form = document.querySelector('.feedback-form');
 const emailEl = form.elements.email;
 const messageEl = form.elements.message;
 
-// Відновлення стану при завантаженні сторінки
 restoreFromStorage();
 
-// Делегування: слухаємо input на формі
 form.addEventListener('input', onInput);
 form.addEventListener('submit', onSubmit);
 
@@ -19,24 +16,25 @@ function onInput(evt) {
   const { name, value } = evt.target;
   if (!(name in formData)) return;
 
-  // Записуємо у сховище обрізані значення
-  formData = { ...formData, [name]: value.trim() };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+  formData = { ...formData, [name]: value };
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+  } catch {}
 }
 
 function onSubmit(evt) {
   evt.preventDefault();
 
-  // Перевірка саме по formData (обидва поля мають бути заповнені)
-  if (!formData.email || !formData.message) {
+  const email = formData.email.trim();
+  const message = formData.message.trim();
+
+  if (!email || !message) {
     alert('Fill please all fields');
     return;
   }
 
-  // Вивід у консоль актуального об'єкта
-  console.log(formData);
+  console.log({ email, message });
 
-  // Очищення сховища, об'єкта і форми
   localStorage.removeItem(STORAGE_KEY);
   formData = { email: '', message: '' };
   form.reset();
@@ -51,7 +49,5 @@ function restoreFromStorage() {
     emailEl.value = typeof saved.email === 'string' ? saved.email : '';
     messageEl.value = typeof saved.message === 'string' ? saved.message : '';
     formData = { email: emailEl.value, message: messageEl.value };
-  } catch {
-    // Некоректний JSON — ігноруємо
-  }
+  } catch {}
 }
