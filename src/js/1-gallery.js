@@ -1,9 +1,9 @@
 import { images } from './images.js';
+import '../css/styles.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const gallery = document.querySelector('.gallery');
-
 const markup = images
   .map(
     ({ preview, original, description }) => `
@@ -25,9 +25,4 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-// 3) На всяк випадок — оновимо список (якщо щось додасться пізніше)
 lightbox.refresh();
-
-// ДІАГНОСТИКА:
-console.log('anchors found:', document.querySelectorAll('.gallery a').length);
-console.log('images array length:', images.length);

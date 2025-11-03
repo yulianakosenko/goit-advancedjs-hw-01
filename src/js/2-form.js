@@ -1,3 +1,4 @@
+import '../css/styles.css';
 const STORAGE_KEY = 'feedback-form-state';
 
 // Об'єкт formData ПОЗА будь-якими функціями
